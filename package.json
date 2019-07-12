@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sharkykh/eslint-plugin-vue.git"
+    "url": "git+https://github.com/sharkykh/eslint-plugin-vue-extra.git"
   },
   "bugs": {
-    "url": "https://github.com/sharkykh/eslint-plugin-vue/issues"
+    "url": "https://github.com/sharkykh/eslint-plugin-vue-extra/issues"
   },
   "main": "src/index.js",
   "scripts": {
