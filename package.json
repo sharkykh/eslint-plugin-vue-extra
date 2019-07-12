@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "@sharkykh/eslint-plugin-vue-extra",
   "description": "ESLint plugin, extension for eslint-plugin-vue",
   "author": "sharkykh",
