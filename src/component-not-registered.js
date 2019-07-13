@@ -49,7 +49,7 @@ module.exports = {
     const tokens = context.parserServices.getTemplateBodyTokenStore && context.parserServices.getTemplateBodyTokenStore();
     const toPascalCase = casing.getConverter('PascalCase');
 
-    const registeredComponents = [];
+    let registeredComponents = [];
     let hasInvalidEOF = false;
 
     /**
@@ -116,7 +116,7 @@ module.exports = {
         }
       },
       utils.executeOnVue(context, obj => {
-        registeredComponents.push(...utils.getRegisteredComponents(obj).map(n => n.name));
+        registeredComponents = utils.getRegisteredComponents(obj).map(node => toPascalCase(node.name));
       })
     );
   }
