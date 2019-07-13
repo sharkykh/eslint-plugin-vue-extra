@@ -1,4 +1,5 @@
 /**
+ * @fileoverview Warn if a component is used in a template without being registered within that file.
  * @author sharkykh
  * Based on https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/component-name-in-template-casing.js
  */
@@ -44,10 +45,10 @@ module.exports = {
 
   create(context) {
     const allowedComponents = VueBuiltInComponents.concat(context.options[0] || []);
-    const registeredComponents = [];
 
     const tokens = context.parserServices.getTemplateBodyTokenStore && context.parserServices.getTemplateBodyTokenStore();
 
+    const registeredComponents = [];
     let hasInvalidEOF = false;
 
     /**
