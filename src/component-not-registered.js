@@ -47,6 +47,7 @@ module.exports = {
     const allowedComponents = VueBuiltInComponents.concat(context.options[0] || []);
 
     const tokens = context.parserServices.getTemplateBodyTokenStore && context.parserServices.getTemplateBodyTokenStore();
+    const toPascalCase = casing.getConverter('PascalCase');
 
     const registeredComponents = [];
     let hasInvalidEOF = false;
@@ -75,6 +76,22 @@ module.exports = {
       return true;
     }
 
+    function isComponentRegistered(name) {
+      const casingName = toPascalCase(name);
+      return registeredComponents.some(componentName => casingName === componentName);
+    }
+
+    function report(node, name) {
+      context.report({
+        node,
+        loc: node.loc,
+        message: 'Component "{{name}}" is used but not registered.',
+        data: {
+          name
+        }
+      });
+    }
+
     return utils.defineTemplateBodyVisitor(
       context,
       {
@@ -88,19 +105,10 @@ module.exports = {
           }
 
           const name = node.rawName;
-          const casingName = casing.getConverter('PascalCase')(name);
-          if (!registeredComponents.some(componentName => casingName === componentName)) {
+          if (!isComponentRegistered(name)) {
             const { startTag } = node;
             const open = tokens.getFirstToken(startTag);
-
-            context.report({
-              node: open,
-              loc: open.loc,
-              message: 'Component "{{name}}" is used but not registered.',
-              data: {
-                name
-              }
-            });
+            report(open, name);
           }
         },
         Program(node) {
