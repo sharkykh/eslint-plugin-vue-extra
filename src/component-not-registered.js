@@ -102,18 +102,14 @@ module.exports = {
               }
             });
           }
+        },
+        Program(node) {
+          hasInvalidEOF = utils.hasInvalidEOF(node);
         }
       },
-      Object.assign(
-        {
-          Program(node) {
-            hasInvalidEOF = utils.hasInvalidEOF(node);
-          }
-        },
-        utils.executeOnVue(context, obj => {
-          registeredComponents.push(...utils.getRegisteredComponents(obj).map(n => n.name));
-        })
-      )
+      utils.executeOnVue(context, obj => {
+        registeredComponents.push(...utils.getRegisteredComponents(obj).map(n => n.name));
+      })
     );
   }
 };
