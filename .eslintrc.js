@@ -8,5 +8,12 @@ module.exports = {
       'error',
       'always',
     ],
+    quotes: [
+      'error',
+      'single',
+      {
+        avoidEscape: true,
+      },
+    ],
   },
 };
