@@ -7,7 +7,7 @@
 
 ## Rules
 
-- [component-not-registered](src/component-not-registered.js) - Warn if a component is used in a [SFC file](https://vuejs.org/v2/guide/single-file-components.html) without being registered (a.k.a. a globally registered component). **Does not support dynamically assigned components.**
+- [component-not-registered](src/component-not-registered.js) - Warn if a component is used in a [SFC file](https://vuejs.org/v2/guide/single-file-components.html) without being registered (a.k.a. a globally registered component). **Supports simple dynamically assigned components (only literal values).**
 
 ## License
 
