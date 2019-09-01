@@ -113,22 +113,6 @@ module.exports = {
             report(open, name);
           }
         },
-        "VAttribute[directive=true][key.name.name='bind'][key.argument.name='is']"(node) {
-          if (
-            !node.value || // `<component :is>`
-            node.value.type !== 'VExpressionContainer' ||
-            !node.value.expression // `<component :is="">`
-          ) {
-            return;
-          }
-
-          if (node.value.expression.type === 'Literal') {
-            const name = node.value.expression.value;
-            if (!isComponentRegistered(name)) {
-              report(node.value.expression, name);
-            }
-          }
-        },
         "VAttribute[directive=false][key.name='is']"(node) {
           const name = node.value.value;
           if (!isComponentRegistered(name)) {
