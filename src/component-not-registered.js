@@ -1,7 +1,9 @@
 /**
  * @fileoverview Warn if a component is used in a template without being registered within that file.
  * @author sharkykh
- * Based on https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/component-name-in-template-casing.js
+ * Based on:
+ * 1. https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/component-name-in-template-casing.js
+ * 2. https://github.com/vuejs/eslint-plugin-vue/blob/master/lib/rules/no-unused-components.js
  */
 'use strict';
 
@@ -109,6 +111,12 @@ module.exports = {
             const { startTag } = node;
             const open = tokens.getFirstToken(startTag);
             report(open, name);
+          }
+        },
+        "VAttribute[directive=false][key.name='is']"(node) {
+          const name = node.value.value;
+          if (!isComponentRegistered(name)) {
+            report(node.value, name);
           }
         },
         Program(node) {
